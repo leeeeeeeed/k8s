@@ -134,7 +134,7 @@ ingress_alb_enabled: false
 # alb_ingress_aws_debug: "false"
 
 # Cert manager deployment
-cert_manager_enabled: false
+cert_manager_enabled: true
 # cert_manager_namespace: "cert-manager"
 # cert_manager_tolerations:
 #   - key: node-role.kubernetes.io/control-plane
@@ -169,7 +169,7 @@ cert_manager_enabled: false
 #   - "--dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53"
 
 # MetalLB deployment
-metallb_enabled: false
+metallb_enabled: true
 metallb_speaker_enabled: "{{ metallb_enabled }}"
 # metallb_version: v0.13.9
 # metallb_protocol: "layer2"
