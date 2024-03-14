@@ -1,18 +1,25 @@
+# gitlab 설치 순서
 
 git clone https://gitlab.com/gitlab-org/charts/gitlab.git
+
 cd gitlab
+
 kubectl create namespace gitlab
 
-curl -O https://gitlab.com/k8s-test-ldj/examples/-/blob/main/values-gitlab.yaml
+curl -O https://gitlab.com/k8s-test-ldj/examples/-/raw/main/values-gitlab.yaml
 
 helm repo add gitlab https://charts.gitlab.io/
-helm repo update
-helm upgrade --namespace gitlab --install gitlab gitlab/gitlab \
-  --set minio.persistence.size=1Gi
-  --set gitlab.gitaly.persistence.size=1Gi
-  --set gitlab.toolbox.backups.cron.persistence.size=1Gi
-  --set gitlab.toolbox.persistence.size=1Gi
 
-root
-pass Ȯ��
+helm repo update
+
+helm dependency build // 주의
+
+helm upgrade --namespace gitlab --install gitlab gitlab/gitlab \ 
+--set minio.persistence.size=1Gi \ 
+--set gitlab.gitaly.persistence.size=1Gi \ 
+--set gitlab.toolbox.backups.cron.persistence.size=1Gi \ 
+--set gitlab.toolbox.persistence.size=1Gi
+
+# 사이트 접속 확인
+# root password 확인 
 kubectl --namespace gitlab get secret gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
