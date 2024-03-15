@@ -8,7 +8,7 @@ metadata:
     version: v3.3.0
 spec:
   persistence:
-    storageClass: ""        # If there is no default StorageClass in your cluster, you need to specify an existing StorageClass here.
+    storageClass: "rook-cephfs"        # If there is no default StorageClass in your cluster, you need to specify an existing StorageClass here.
   authentication:
     jwtSecret: ""           # Keep the jwtSecret consistent with the Host Cluster. Retrieve the jwtSecret by executing "kubectl -n kubesphere-system get cm kubesphere-config -o yaml | grep -v "apiVersion" | grep jwtSecret" on the Host Cluster.
   local_registry: ""        # Add your private registry address if it is needed.
@@ -50,12 +50,12 @@ spec:
         default: false
     es:   # Storage backend for logging, events and auditing.
       master:
-        volumeSize: 1Gi  # The volume size of Elasticsearch master nodes.
-        replicas: 1      # The total number of master nodes. Even numbers are not allowed.
+        volumeSize: 3Gi  # The volume size of Elasticsearch master nodes.
+        replicas: 2      # The total number of master nodes. Even numbers are not allowed.
         resources: {}
       data:
-        volumeSize: 1Gi  # The volume size of Elasticsearch data nodes.
-        replicas: 1       # The total number of data nodes.
+        volumeSize: 2Gi  # The volume size of Elasticsearch data nodes.
+        replicas: 3       # The total number of data nodes.
         resources: {}
       logMaxAge: 7             # Log retention time in built-in Elasticsearch. It is 7 days by default.
       elkPrefix: logstash      # The string making up index names. The index name will be formatted as ks-<elk_prefix>-log.
@@ -102,9 +102,9 @@ spec:
       replicas: 2
       # resources: {}
   metrics_server:                    # (CPU: 56 m, Memory: 44.35 MiB) It enables HPA (Horizontal Pod Autoscaler).
-    enabled: false                   # Enable or disable metrics-server.
+    enabled: true                   # Enable or disable metrics-server.
   monitoring:
-    storageClass: ""                 # If there is an independent StorageClass you need for Prometheus, you can specify it here. The default StorageClass is used by default.
+    storageClass: "rook-cephfs"                 # If there is an independent StorageClass you need for Prometheus, you can specify it here. The default StorageClass is used by default.
     node_exporter:
       port: 9100
       # resources: {}
@@ -114,7 +114,7 @@ spec:
       resources: {}
     prometheus:
       replicas: 1  # Prometheus replicas are responsible for monitoring different segments of data source and providing high availability.
-      volumeSize: 1Gi  # Prometheus PVC size.
+      volumeSize: 4Gi  # Prometheus PVC size.
       resources: {}
       operator:
         resources: {}
@@ -170,7 +170,7 @@ spec:
         # resources: {}
         # hostNetWork: false
       iptables-manager:
-        enabled: true 
+        enabled: false 
         mode: "external"
         # resources: {}
       # edgeService:
