@@ -1,0 +1,47 @@
+주차 Edge 시스템 Kubernetes 기본 포트 정리 
+
+01.CI/CD vs GitOps
+02.Git(gitlab)
+O, 8080
+03.Jenkins.
+O, 8080
+04.Kaniko
+X
+05.Vault
+X, 80
+06.Istio
+X
+07.Nginx
+O, 80
+08.Argo CD.
+O, 8080
+09.Kafka
+X, 9092
+10.ELK(Elasticsearch,Logstash,Kibana)
+Elasticsearch : X, 9200 
+Logstash : X, 5044
+Kibana : O, 5601
+11.Nexus
+O, 8081
+12.Helm
+X
+13.Harbor
+O, 80
+14.Prometheus.
+9090
+15.Grafana.
+3000
+16.kubesphere.
+30880
+17.Sonarqube
+9000
+18.MetalLB
+19.Rook
+20.K9s.
+21.Mongodb
+27018
+22.K8sgpt.
+23.KubeSpray.
+24.containerd
+25.kubectl-ai.
+26.testkube
